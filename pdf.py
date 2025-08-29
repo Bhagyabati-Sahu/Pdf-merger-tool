@@ -4,7 +4,6 @@ from tkinter import filedialog, messagebox
 import PyPDF2
 
 try:
-    # tkinterDnD2 is needed for drag-and-drop
     from tkinterdnd2 import TkinterDnD, DND_FILES
 except ImportError:
     messagebox.showerror("Missing Library", "Please install tkinterDnD2:\n\npip install tkinterdnd2")
@@ -22,7 +21,7 @@ def select_files():
 def add_files(files):
     """Add selected or dropped files to the listbox."""
     for f in files:
-        f = f.strip("{}")  # Handle spaces in file paths
+        f = f.strip("{}") 
         if f.lower().endswith(".pdf"):
             file_list.insert(tk.END, f)
 
@@ -33,7 +32,7 @@ def merge_pdfs():
         messagebox.showwarning("No Files", "Please select at least one PDF.")
         return
     
-    # Ask where to save merged file
+    
     output_file = filedialog.asksaveasfilename(
         defaultextension=".pdf",
         filetypes=[("PDF Files", "*.pdf")],
@@ -63,12 +62,10 @@ def clear_files():
     """Clear all files from the listbox."""
     file_list.delete(0, tk.END)
 
-# TkinterDnD GUI Setup
 root = TkinterDnD.Tk()
 root.title("PDF Merger Tool 📄 ")
 root.geometry("600x400")
 
-# Buttons
 btn_frame = tk.Frame(root)
 btn_frame.pack(pady=10)
 
@@ -77,13 +74,11 @@ tk.Button(btn_frame, text="🔀 Sort Files", command=sort_files).grid(row=0, col
 tk.Button(btn_frame, text="🗑 Clear All", command=clear_files).grid(row=0, column=2, padx=5)
 tk.Button(btn_frame, text="📌 Merge PDFs", command=merge_pdfs, bg="lightgreen").grid(row=0, column=3, padx=5)
 
-# Listbox for files
 file_list = tk.Listbox(root, width=70, height=15, selectmode=tk.MULTIPLE)
 file_list.pack(padx=10, pady=10, fill=tk.BOTH, expand=True)
 
-# Enable drag-and-drop
 file_list.drop_target_register(DND_FILES)
 file_list.dnd_bind("<<Drop>>", lambda e: add_files(e.data.split()))
 
-# Run the app
 root.mainloop()
+
