@@ -22,5 +22,10 @@ Supports **drag & drop**, file selection, sorting, and merging multiple PDFs int
 
 ### Clone the repository
 ```bash
-git clone https://github.com/your-username/pdf-merger-tool.git
+git clone(https://github.com/Bhagyabati-Sahu/Pdf-merger-tool.git)
 cd pdf-merger-tool
+pip install -r requirements.txt
+run- python pdf_merger.py
+
+
+
